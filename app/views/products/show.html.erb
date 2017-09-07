@@ -1,9 +1,21 @@
-<h2><%= @product.name %></h2>
-<h3><%= @product.price %></h3>
-<h4><%= @product.image %></h4>
-<h4><%= @product.description %></h4>
+<section>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="product_single">
+                <img class="card-img-top" src="<%= @product.image%>" alt="Card image cap">
+                <h2>Name: <%= @product.name %></h2>
+                <h3>Price: <%= number_to_currency(@product.price) %></h3>
+                <h7><%= @product.sale_message %></h7>
+                <h6>Tax: <%= number_to_currency(@product.tax) %></h6>
+                <h6>Total: <%= number_to_currency(@product.total) %></h6>
+                <h4>Description: <%= @product.description %></h4>
 
-<%= form_tag "/products/#{@product.id}", method: :delete do%>
-    <input type="submit" value="Delete Product">
 
-<% end %>
+                <%= form_tag "/products/#{@product.id}", method: :delete do%>
+                    <input type="submit" value="Delete Product">
+                <a href="/products/" class="btn btn-primary">All Products</a>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>

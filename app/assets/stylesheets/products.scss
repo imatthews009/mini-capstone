@@ -96,3 +96,28 @@ body {
     background-image: url("school.png");
     font-family: 'Raleway', sans-serif;
 }
+.product_single{
+  color: black;
+  font-size: 22px;
+  padding: 10px;
+}
+.product_single h2, h3, h7, h6, h4{
+  font-size: 22px;
+}
+
+.product_single img {
+  height: 200px;
+  width: auto;
+}
+
+.card {
+  padding: 10px;
+  margin: 10px;
+}
+
+.card img {
+  height: 200px;
+  width: auto;
+  border-radius: 2px;
+  border-color: black;
+}
