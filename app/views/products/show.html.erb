@@ -15,7 +15,6 @@
                     <h4>Everyday Value!</h4>
                     <h3>Price: <%= number_to_currency(@product.price) %></h3>
                 <% end %>
-               <!--  <h3>Price: <%= number_to_currency(@product.price) %></h3> -->
                 
                 <h6>Tax: <%= number_to_currency(@product.tax) %></h6>
                 <h6>Total: <%= number_to_currency(@product.total) %></h6>
@@ -27,6 +26,7 @@
                     <input type="submit" value="Delete Product">
                 <a href="/products/" class="btn btn-primary">All Products</a>
                 <% end %>
+                <%= link_to "Add image", "/products/#{@product.id}/images/new", class: "btn btn-info" %>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
     
     def index
         @products = Product.all
-        
+
         sort_att = params[:sort] 
         price_att = params[:price]
         random = params[:show]
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
     end
 
     def create
-        @product = Product.new({name: params[:name], price: params[:price], description: params[:description]})
+        @product = Product.new({name: params[:name], price: params[:price], description: params[:description], supplier_id: 1})
         @product.save
         @image = Image.new({url: params[:image], product_id: 1})
         flash[:primary] = "Successfully saved new products"
