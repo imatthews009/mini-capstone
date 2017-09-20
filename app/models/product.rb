@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
     belongs_to :supplier
     has_many :images
+    has_many :orders
+    has_many :category_products
+    has_many :categories, through: :category_products
+
     # def sale_message
     #     if price.to_f <= 2
     #         return "Discount item"
@@ -25,6 +29,6 @@ class Product < ApplicationRecord
     end
 
     def discounted? #? this will evaluate to true of false
-        return (price.to_f <=2)
+        return (price.to_f <= 2)
     end
 end

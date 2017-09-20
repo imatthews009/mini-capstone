@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
     
+    
     def index
         @products = Product.all
 
@@ -9,11 +10,16 @@ class ProductsController < ApplicationController
         if sort_att
             @products = Product.all.order(sort_att)
         end
-        if price_att
-            @products = Product.where("price < ?", price_att)
+        if params[:discount]
+            @products = Product.where("price <= ?", "5")
         end
         if random
             @products = Product.order("RANDOM()").limit(1)
+        end
+
+        if params[:category]
+            selected_cat = Category.find_by(title: params[:category])
+            @products = selected_cat.products
         end
         render "index.html.erb"
     end
@@ -32,7 +38,10 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find_by(id: params[:id])
+        # making a category which returns all catagories in a hash associated with the selected product
+        @category = @product.categories
         render "show.html.erb"
+
     end
 
     def edit

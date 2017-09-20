@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sports: MyString
+  home: MyString
+  computer: MyString
+
+two:
+  sports: MyString
+  home: MyString
+  computer: MyString

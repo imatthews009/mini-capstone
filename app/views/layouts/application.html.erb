@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    
     <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,19 +19,41 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        <% if current_user%>
         <li class="nav-item active">
           <!-- updated nav link to sort the products by price. linked to products_controller.rb index method -->
           <a class="nav-link" href="/products?sort=price">Sort by Price Low</a> 
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/products?sort=price desc">Sort by Price High</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="products?price=5">Discount items</a>
+        <li class="nav-item active">
+          <a class="nav-link disabled" href="products?discount=">Discount items</a>
         </li>
-        <li class="nav-item">
+       <!--  This link just goes to show. It doesn't call anything specific. The products_controller than chooses a random product and limits it to one in order to display a random product. -->
+        <li class="nav-item active">
           <a class="nav-link disabled" href="products?show=">Random Product</a>
         </li>
+        
+          <!-- This cycles through all know categories and then sets the category as a param. The param is then used in the products_controller to call all products associated with that category. -->
+          <% Category.all.each do |category| %>
+             <li class="nav-item active"><a class="nav-link disabled" href="/products?category=<%= category.title %>"><%= category.title %></a></li>
+        <% end %>
+        <li class="nav-item active">
+          <a class="nav-link disabled" href="/logout">Logout</a>
+        </li>
+        <% else %>
+          <li class="nav-item active">
+            <a class="nav-link disabled" href="/signup">Sign Up</a>
+          </li> 
+          <li class="nav-item active">
+            <a class="nav-link disabled" href="/login">Login</a>
+          </li> 
+
+        <% end %>
+
+        
+
       </ul>
       <%= form_tag "/search", method: :post do %>
          <%= text_field_tag :search %>

@@ -1,32 +1,81 @@
 <section>
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-lg-">
             <div class="product_single">
-                <% @product.images.each do |image| %>
-                    <img class="card-img-top" src="<%= image.url %>" alt="Card image cap">
-                <% end %>
-                <h2>Name: <%= @product.name %></h2>
-                <h7>Vendor: <%= @product.supplier.name %></h7>
-
-                <%if @product.discounted? %>
-                    <h4 class="discount-item">Discount item!</h4>
-                    <p>Price: <%= number_to_currency(@product.price) %></p>
-                <% else %>
-                    <h4>Everyday Value!</h4>
-                    <h3>Price: <%= number_to_currency(@product.price) %></h3>
-                <% end %>
+                <div class="row images">
+                    <div class="col-12">
+                    <% @product.images.each do |image| %>
+                        <img class="card-img-top" src="<%= image.url %>" alt="Card image cap">
+                    <% end %>
+                    </div>
+                </div>
                 
-                <h6>Tax: <%= number_to_currency(@product.tax) %></h6>
-                <h6>Total: <%= number_to_currency(@product.total) %></h6>
-                <h4>Description: <%= @product.description %></h4>
-                <h4>In Stock: <%= @product.in_stock %></h4>
+                <div class="row text-and-form">
+                    <div class="col-6">
+                    
+                        <h2><b>Name</b>: <%= @product.name %></h2>
+                        <h7><b>Vendor</b>: <%= @product.supplier.name %></h7>
 
+                        <%if @product.discounted? %>
+                            <h4 class="discount-item">Discount item!</h4>
+                            <p><b>Price</b>: <%= number_to_currency(@product.price) %></p>
+                        <% else %>
+                            <h4><b>Everyday Value!</b></h4>
+                            <h3><b>Price</b>: <%= number_to_currency(@product.price) %></h3>
+                        <% end %>
+                        
+                        <h6><b>Tax</b>: <%= number_to_currency(@product.tax) %></h6>
+                        <h6><b>Total</b>: <%= number_to_currency(@product.total) %></h6>
+                        <h4><b>Description</b>: <%= @product.description %></h4>
+                        <h4><b>In Stock</b>: <%= @product.in_stock %></h4>
+                        <h8>
+                            <!-- cycling each category associated with the selected product then displaying the title in a list -->
+                            <b>Categories</b>:
+                            <% @category.each do |category|%>
+                            <ul>
+                                <li><%= category.title  %></li>
+                            </ul>
+                            <% end %>
 
-                <%= form_tag "/products/#{@product.id}", method: :delete do%>
-                    <input type="submit" value="Delete Product">
-                <a href="/products/" class="btn btn-primary">All Products</a>
-                <% end %>
-                <%= link_to "Add image", "/products/#{@product.id}/images/new", class: "btn btn-info" %>
+                        </h8>
+
+                    </div>
+                    <div class="col-6"
+                        <h1> Order Product </h1>
+                        <%= form_tag "/orders", method: :post do %>
+
+                            <div>
+                                <input type="hidden" name="product_id" value="<%= @product.id%>">
+                            </div> 
+                                
+                            <div>
+                                Quantity: <input type="integer" name="quantity">
+                            </div>
+
+                            <input type="submit" value="Submit">
+                        <% end %>
+                    </div>
+                </div>
+                </div>
+                <div class="row buttons">
+                    <div class="col-12">
+                        <div class="button"
+                            <%= form_tag "/products/#{@product.id}", method: :delete do%>
+                            <input type="submit" value="Delete Product">
+                        
+                        
+                            <a href="/products/" class="btn btn-primary">All Products</a>
+                            <% end %>
+                            
+                            <div class="image-button">
+                                <%= link_to "Add image", "/products/#{@product.id}/images/new", class: "btn btn-info" %>
+                            </div>
+                            <%= link_to "Edit product", "/products/#{@product.id}/edit", class: "btn btn-info" %>
+                            
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

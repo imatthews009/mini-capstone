@@ -1,0 +1,19 @@
+<section>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="order_single">
+                    <img class="card-img-top" src="<%= @product.images.first.url %>" alt="Card image cap">
+
+                <h2>User emal: <%= @order.user.email %></h2>
+                 <h2>Product name: <%= @order.product.name %></h2>
+                 <h2>Quantity: <%= @order.quantity %></h2>
+                 <h2>Purchase at: <%= @order.created_at %></h2>
+                 <h2>Subtotal: <%= @product.price * @order.quantity %></h2>
+                 <h2>tax: <%= number_to_currency(@product.tax * @order.quantity)  %></h2>
+                 <h2>total: <%= @product.total * @order.quantity %></h2>
+
+                
+            </div>
+        </div>
+    </div>
+</section>
