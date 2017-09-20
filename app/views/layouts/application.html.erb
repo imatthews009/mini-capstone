@@ -12,7 +12,7 @@
   <body>
     
     <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/products">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,10 +22,10 @@
         <% if current_user%>
         <li class="nav-item active">
           <!-- updated nav link to sort the products by price. linked to products_controller.rb index method -->
-          <a class="nav-link" href="/products?sort=price">Sort by Price Low</a> 
+          <a class="nav-link" href="/products?sort=price">Price Low</a> 
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/products?sort=price desc">Sort by Price High</a>
+          <a class="nav-link" href="/products?sort=price desc">Price High</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link disabled" href="products?discount=">Discount items</a>
@@ -34,6 +34,11 @@
         <li class="nav-item active">
           <a class="nav-link disabled" href="products?show=">Random Product</a>
         </li>
+        <!-- added method to application controller so the cart count would show on all pages -->
+        <li class="nav-item active">
+           <a class="nav-link disabled" href="/cart">Carted Products - <%= @cart_count%></a>
+        </li>
+       
         
           <!-- This cycles through all know categories and then sets the category as a param. The param is then used in the products_controller to call all products associated with that category. -->
           <% Category.all.each do |category| %>
@@ -59,6 +64,8 @@
          <%= text_field_tag :search %>
          <%= submit_tag "Search" %>
       <% end %>
+
+
 
     </div>
     </nav>

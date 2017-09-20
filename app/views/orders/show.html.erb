@@ -2,17 +2,21 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="order_single">
-                    <img class="card-img-top" src="<%= @product.images.first.url %>" alt="Card image cap">
-
+    
+                <h1>Your Order</h1>
                 <h2>User emal: <%= @order.user.email %></h2>
-                 <h2>Product name: <%= @order.product.name %></h2>
-                 <h2>Quantity: <%= @order.quantity %></h2>
-                 <h2>Purchase at: <%= @order.created_at %></h2>
-                 <h2>Subtotal: <%= @product.price * @order.quantity %></h2>
-                 <h2>tax: <%= number_to_currency(@product.tax * @order.quantity)  %></h2>
-                 <h2>total: <%= @product.total * @order.quantity %></h2>
+                <h2>Purchase at: <%= @order.created_at %></h2>
+                <h2>Subtotal: <%= number_to_currency(@order.subtotal) %></h2>
+                <h2>tax: <%= number_to_currency(@order.tax)  %></h2>
+                <h2>total: <%=number_to_currency(@order.total) %></h2>
 
-                
+                <!-- looping through every carted product in the order that was just created. calling the .products because of the association set up. -->
+                <%@order.carted_products.each do |carted_product| %>
+                    <img class="order-image" src="<%=carted_product.product.images.first.url %>">
+                    <h3>Product Name:<%=carted_product.product.name%></h3>
+                    <h3>Quantity:<%=carted_product.quantity%></h3>
+                    
+                <% end %>
             </div>
         </div>
     </div>

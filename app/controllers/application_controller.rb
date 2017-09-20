@@ -8,4 +8,17 @@ class ApplicationController < ActionController::Base
     def authenticat_user!
         redirect_to "/login" unless current_user
     end
+
+    #ensures that this method is run first
+    before_action :calculated_cart_count
+
+    private #######
+
+    def calculated_cart_count
+        if current_user
+            @cart_count = current_user.carted_products.where(status: "carted").count
+        else
+            @cart_count = 0
+        end
+    end
 end

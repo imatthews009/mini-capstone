@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
     
     
     def index
+        
         @products = Product.all
 
         sort_att = params[:sort] 

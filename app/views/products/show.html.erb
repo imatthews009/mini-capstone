@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-6"
                         <h1> Order Product </h1>
-                        <%= form_tag "/orders", method: :post do %>
+                        <%= form_tag "/cart", method: :post do %>
 
                             <div>
                                 <input type="hidden" name="product_id" value="<%= @product.id%>">
@@ -52,7 +52,7 @@
                                 Quantity: <input type="integer" name="quantity">
                             </div>
 
-                            <input type="submit" value="Submit">
+                            <input type="submit" value="Add to cart">
                         <% end %>
                     </div>
                 </div>

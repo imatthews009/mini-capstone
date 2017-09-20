@@ -1,0 +1,13 @@
+<h1><% @carted_products.each do |product| %></h1>
+    <h2><%=product.product.name %></h2>
+    <h2>Quaninty: <%= product.quantity%></h2>
+    <h2>Status: <%= product.status%></h2>
+    <!-- added link to remove a product which redirect to the delete route. From the delete route the status is changed to removed -->
+    <%= link_to "Remove", "/cart/#{product.id}", method: :delete%>
+<% end %> 
+
+<%= form_tag "/orders", method: :post do%>
+    <input type="submit" value="Buy Now!">
+<% end %>
+
+
