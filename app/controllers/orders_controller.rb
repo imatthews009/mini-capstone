@@ -24,6 +24,11 @@ class OrdersController < ApplicationController
 
     def show
         @order = Order.find_by(id: params[:id])
+        if current_user == @order.user
+            render "show.html.erb"
+        else
+            redirect_to "/products"
+        end
         
     end
 end

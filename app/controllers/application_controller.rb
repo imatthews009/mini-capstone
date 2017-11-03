@@ -5,8 +5,15 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_user
 
-    def authenticat_user!
+    def authenticate_user!
         redirect_to "/login" unless current_user
+    end
+
+    def authenticate_admin!
+        unless current_user && current_user.admin 
+            flash[:warning] = "you are not authorized!"
+            redirect_to "/products"
+        end
     end
 
     #ensures that this method is run first

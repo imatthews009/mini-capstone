@@ -41,25 +41,27 @@
 
                     </div>
                     <div class="col-6"
-                        <h1> Order Product </h1>
-                        <%= form_tag "/cart", method: :post do %>
+                        <% if current_user%>
+                            <h1> Order Product </h1>
+                            <%= form_tag "/cart", method: :post do %>
 
-                            <div>
-                                <input type="hidden" name="product_id" value="<%= @product.id%>">
-                            </div> 
-                                
-                            <div>
-                                Quantity: <input type="integer" name="quantity">
-                            </div>
+                                <div>
+                                    <input type="hidden" name="product_id" value="<%= @product.id%>">
+                                </div> 
+                                    
+                                <div>
+                                    Quantity: <input type="integer" name="quantity">
+                                </div>
 
-                            <input type="submit" value="Add to cart">
+                                <input type="submit" value="Add to cart">
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
                 </div>
                 <div class="row buttons">
                     <div class="col-12">
-                        <div class="button"
+                        <div class="button">
                             <%= form_tag "/products/#{@product.id}", method: :delete do%>
                             <input type="submit" value="Delete Product">
                         

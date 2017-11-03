@@ -2,20 +2,23 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="order_single">
-    
-                <h1>Your Order</h1>
-                <h2>User emal: <%= @order.user.email %></h2>
-                <h2>Purchase at: <%= @order.created_at %></h2>
-                <h2>Subtotal: <%= number_to_currency(@order.subtotal) %></h2>
-                <h2>tax: <%= number_to_currency(@order.tax)  %></h2>
-                <h2>total: <%=number_to_currency(@order.total) %></h2>
+                <% if current_user == @order.user %>
+                    <h1>Your Order</h1>
+                    <h2>User emal: <%= @order.user.email %></h2>
+                    <h2>Purchase at: <%= @order.created_at %></h2>
+                    <h2>Subtotal: <%= number_to_currency(@order.subtotal) %></h2>
+                    <h2>tax: <%= number_to_currency(@order.tax)  %></h2>
+                    <h2>total: <%=number_to_currency(@order.total) %></h2>
 
-                <!-- looping through every carted product in the order that was just created. calling the .products because of the association set up. -->
-                <%@order.carted_products.each do |carted_product| %>
-                    <img class="order-image" src="<%=carted_product.product.images.first.url %>">
-                    <h3>Product Name:<%=carted_product.product.name%></h3>
-                    <h3>Quantity:<%=carted_product.quantity%></h3>
-                    
+                    <!-- looping through every carted product in the order that was just created. calling the .products because of the association set up. -->
+                    <%@order.carted_products.each do |carted_product| %>
+                        <img class="order-image" src="<%=carted_product.product.images.first.url %>">
+                        <h3>Product Name:<%=carted_product.product.name%></h3>
+                        <h3>Quantity:<%=carted_product.quantity%></h3>
+                        
+                    <% end %>
+                <% else %>
+                    <h4>This is not your order</h4>
                 <% end %>
             </div>
         </div>

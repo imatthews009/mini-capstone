@@ -5,6 +5,11 @@ class Product < ApplicationRecord
     has_many :categories, through: :category_products
     has_many :carted_products
 
+    validates :name, uniqueness: true, presence: true
+    validates :description, presence: true, length: { maximum: 500}
+    validates :price, presence: true, numericality: true
+
+
     # def sale_message
     #     if price.to_f <= 2
     #         return "Discount item"

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    
+    before_action :authenticate_admin!, except: [:index, :show, :search]
     
     def index
         
@@ -26,15 +26,20 @@ class ProductsController < ApplicationController
     end
 
     def new
+        @product = Product.new
         render "new.html.erb"
     end
 
     def create
         @product = Product.new({name: params[:name], price: params[:price], description: params[:description], supplier_id: 1})
-        @product.save
+
+        if @product.save
         @image = Image.new({url: params[:image], product_id: 1})
         flash[:primary] = "Successfully saved new products"
         redirect_to "/products/#{@product.id}"
+        else
+            render "new.html.erb"
+        end
     end
 
     def show
@@ -52,17 +57,26 @@ class ProductsController < ApplicationController
 
     def update
         @product = Product.find_by(id: params[:id])
-        @product.update({name: params[:name], price: params[:price], image: params[:image], description: params[:description], in_stock: params[:in_stock]})
-        @product.save
-        flash[:success] = "Successfully update product"
-        redirect_to "/products/#{@product.id}"
+        @product.name = params[:name]
+        @product.description = params[:description]
+        @product.price = params[:price]
+        
+        
+        if @product.save
+            flash[:success] = "Successfully update product"
+            redirect_to "/products/#{@product.id}"
+        else 
+            render "edit.html.erb"
+        end
     end
+
     def destroy
         @product = Product.find_by(id: params[:id])
         @product.destroy
         flash[:warning] = "Successfully destroyed product"
         redirect_to "/products"
     end
+
     def search
         search_term = params[:search]
         @products = Product.where("name LIKE ?", "%#{search_term}%")

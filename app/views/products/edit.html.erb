@@ -1,3 +1,16 @@
+<% if @product && @product.errors.any? %>
+    <div class="error_messages">
+        <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <ul>
+            <% @product.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+
+    </div>
+<% end %>
+
+
 <h1> Edit <%= @product.name %> Product </h1>
 <!-- now a patch request, not post -->
 <%= form_tag "/products/#{@product.id}", method: :patch do %>

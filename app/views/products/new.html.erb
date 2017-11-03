@@ -1,27 +1,32 @@
+<% if @product && @product.errors.any? %>
+    <div class="error_messages">
+        <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <ul>
+            <% @product.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+
+    </div>
+<% end %>
+
 <h1> Add Product </h1>
 <%= form_tag "/products", method: :post do %>
 
     <div>
-        Name: <input type: "text" name="name">
+        Name: <input type: "text" name="name" value="<%=@product.name %>">
     </div>
     <div>
-        Price: <input type: "float" name="price">
+        Price: <input type: "float" name="price" value="<%=@product.price%>">
     </div> 
         
-    <div>
-        Image URL: <input type="text" name="image">
-    </div>
-
-    <div>
-        Image URL: <input type="text" name="image">
-    </div>
-
-    <div>
-        Image URL: <input type="text" name="image">
-    </div>
     
     <div>
-        Description: <input type="text" name="description">
+        Description: <input type="text" name="description" value="<%=@product.description %>">
+    </div>
+
+    <div>
+        Supplier: <%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name %>
     </div>
     <input type="submit" value="Submit">
 <% end %>

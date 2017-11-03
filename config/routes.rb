@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root to: "products#index"
+
   get "/single_product" => "products#single_product"
   get "/products" => "products#index"
 
